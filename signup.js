@@ -6750,8 +6750,34 @@ var Xi = Ji((Sf, ia)=>{
     la(), ia.exports = ra();
 });
 var ua = bi(Xi()), oa = bi(Xi()), { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: kf , createPortal: Ef , createRoot: xf , findDOMNode: Cf , flushSync: Nf , hydrate: _f , hydrateRoot: zf , render: Pf , unmountComponentAtNode: Lf , unstable_batchedUpdates: Tf , unstable_renderSubtreeIntoContainer: Mf , version: Ff  } = oa, { default: vf , ...gf } = oa, Df = (ua.default ?? vf) ?? gf;
-const __default = ()=>Ye.createElement("div", {
-        className: "text-lg bg-slate-50"
-    }, "Hello PeopleMart")
-;
-zf(document.getElementById('root'), Ye.createElement(__default, null));
+class Signup extends Ye.Component {
+    onSubmit() {}
+    render() {
+        return Ye.createElement("div", null, Ye.createElement("img", {
+            className: "mx-auto",
+            src: "https:///peoplemartdao.github.io/images/logo.svg"
+        }), Ye.createElement("div", {
+            className: "text-center text-4xl"
+        }, "Mart for all People"), Ye.createElement("div", {
+            className: "bg-slate-100 w-96 mx-auto my-6 px-6 py-3 grid gap-3",
+            style: {
+                gridTemplateColumns: "minmax(10px, 1fr) 6fr"
+            }
+        }, Ye.createElement("div", null, "Email:"), Ye.createElement("input", {
+            type: "text",
+            id: "email",
+            name: "email"
+        }), Ye.createElement("div", null, "Refer:"), Ye.createElement("input", {
+            className: "bg-gray-200",
+            type: "text",
+            id: "refer",
+            name: "refer",
+            disabled: true
+        }), Ye.createElement("button", {
+            className: "col-span-2 bg-blue-800 text-white rounded",
+            type: "button",
+            onClick: this.onSubmit
+        }, "Join")));
+    }
+}
+zf(document.getElementById('root'), Ye.createElement(Signup, null));
