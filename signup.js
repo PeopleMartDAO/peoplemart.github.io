@@ -6750,28 +6750,390 @@ var Xi = Ji((Sf, ia)=>{
     la(), ia.exports = ra();
 });
 var ua = bi(Xi()), oa = bi(Xi()), { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: kf , createPortal: Ef , createRoot: xf , findDOMNode: Cf , flushSync: Nf , hydrate: _f , hydrateRoot: zf , render: Pf , unmountComponentAtNode: Lf , unstable_batchedUpdates: Tf , unstable_renderSubtreeIntoContainer: Mf , version: Ff  } = oa, { default: vf , ...gf } = oa, Df = (ua.default ?? vf) ?? gf;
+const server = '';
+async function signup(email, refer) {
+    return await fetch(`${server}/signup?email=${email}&refer=${refer}`);
+}
+var Status;
+(function(Status1) {
+    Status1[Status1["Continue"] = 100] = "Continue";
+    Status1[Status1["SwitchingProtocols"] = 101] = "SwitchingProtocols";
+    Status1[Status1["Processing"] = 102] = "Processing";
+    Status1[Status1["EarlyHints"] = 103] = "EarlyHints";
+    Status1[Status1["OK"] = 200] = "OK";
+    Status1[Status1["Created"] = 201] = "Created";
+    Status1[Status1["Accepted"] = 202] = "Accepted";
+    Status1[Status1["NonAuthoritativeInfo"] = 203] = "NonAuthoritativeInfo";
+    Status1[Status1["NoContent"] = 204] = "NoContent";
+    Status1[Status1["ResetContent"] = 205] = "ResetContent";
+    Status1[Status1["PartialContent"] = 206] = "PartialContent";
+    Status1[Status1["MultiStatus"] = 207] = "MultiStatus";
+    Status1[Status1["AlreadyReported"] = 208] = "AlreadyReported";
+    Status1[Status1["IMUsed"] = 226] = "IMUsed";
+    Status1[Status1["MultipleChoices"] = 300] = "MultipleChoices";
+    Status1[Status1["MovedPermanently"] = 301] = "MovedPermanently";
+    Status1[Status1["Found"] = 302] = "Found";
+    Status1[Status1["SeeOther"] = 303] = "SeeOther";
+    Status1[Status1["NotModified"] = 304] = "NotModified";
+    Status1[Status1["UseProxy"] = 305] = "UseProxy";
+    Status1[Status1["TemporaryRedirect"] = 307] = "TemporaryRedirect";
+    Status1[Status1["PermanentRedirect"] = 308] = "PermanentRedirect";
+    Status1[Status1["BadRequest"] = 400] = "BadRequest";
+    Status1[Status1["Unauthorized"] = 401] = "Unauthorized";
+    Status1[Status1["PaymentRequired"] = 402] = "PaymentRequired";
+    Status1[Status1["Forbidden"] = 403] = "Forbidden";
+    Status1[Status1["NotFound"] = 404] = "NotFound";
+    Status1[Status1["MethodNotAllowed"] = 405] = "MethodNotAllowed";
+    Status1[Status1["NotAcceptable"] = 406] = "NotAcceptable";
+    Status1[Status1["ProxyAuthRequired"] = 407] = "ProxyAuthRequired";
+    Status1[Status1["RequestTimeout"] = 408] = "RequestTimeout";
+    Status1[Status1["Conflict"] = 409] = "Conflict";
+    Status1[Status1["Gone"] = 410] = "Gone";
+    Status1[Status1["LengthRequired"] = 411] = "LengthRequired";
+    Status1[Status1["PreconditionFailed"] = 412] = "PreconditionFailed";
+    Status1[Status1["RequestEntityTooLarge"] = 413] = "RequestEntityTooLarge";
+    Status1[Status1["RequestURITooLong"] = 414] = "RequestURITooLong";
+    Status1[Status1["UnsupportedMediaType"] = 415] = "UnsupportedMediaType";
+    Status1[Status1["RequestedRangeNotSatisfiable"] = 416] = "RequestedRangeNotSatisfiable";
+    Status1[Status1["ExpectationFailed"] = 417] = "ExpectationFailed";
+    Status1[Status1["Teapot"] = 418] = "Teapot";
+    Status1[Status1["MisdirectedRequest"] = 421] = "MisdirectedRequest";
+    Status1[Status1["UnprocessableEntity"] = 422] = "UnprocessableEntity";
+    Status1[Status1["Locked"] = 423] = "Locked";
+    Status1[Status1["FailedDependency"] = 424] = "FailedDependency";
+    Status1[Status1["TooEarly"] = 425] = "TooEarly";
+    Status1[Status1["UpgradeRequired"] = 426] = "UpgradeRequired";
+    Status1[Status1["PreconditionRequired"] = 428] = "PreconditionRequired";
+    Status1[Status1["TooManyRequests"] = 429] = "TooManyRequests";
+    Status1[Status1["RequestHeaderFieldsTooLarge"] = 431] = "RequestHeaderFieldsTooLarge";
+    Status1[Status1["UnavailableForLegalReasons"] = 451] = "UnavailableForLegalReasons";
+    Status1[Status1["InternalServerError"] = 500] = "InternalServerError";
+    Status1[Status1["NotImplemented"] = 501] = "NotImplemented";
+    Status1[Status1["BadGateway"] = 502] = "BadGateway";
+    Status1[Status1["ServiceUnavailable"] = 503] = "ServiceUnavailable";
+    Status1[Status1["GatewayTimeout"] = 504] = "GatewayTimeout";
+    Status1[Status1["HTTPVersionNotSupported"] = 505] = "HTTPVersionNotSupported";
+    Status1[Status1["VariantAlsoNegotiates"] = 506] = "VariantAlsoNegotiates";
+    Status1[Status1["InsufficientStorage"] = 507] = "InsufficientStorage";
+    Status1[Status1["LoopDetected"] = 508] = "LoopDetected";
+    Status1[Status1["NotExtended"] = 510] = "NotExtended";
+    Status1[Status1["NetworkAuthenticationRequired"] = 511] = "NetworkAuthenticationRequired";
+})(Status || (Status = {}));
+new Map([
+    [
+        Status.Continue,
+        "Continue"
+    ],
+    [
+        Status.SwitchingProtocols,
+        "Switching Protocols"
+    ],
+    [
+        Status.Processing,
+        "Processing"
+    ],
+    [
+        Status.EarlyHints,
+        "Early Hints"
+    ],
+    [
+        Status.OK,
+        "OK"
+    ],
+    [
+        Status.Created,
+        "Created"
+    ],
+    [
+        Status.Accepted,
+        "Accepted"
+    ],
+    [
+        Status.NonAuthoritativeInfo,
+        "Non-Authoritative Information"
+    ],
+    [
+        Status.NoContent,
+        "No Content"
+    ],
+    [
+        Status.ResetContent,
+        "Reset Content"
+    ],
+    [
+        Status.PartialContent,
+        "Partial Content"
+    ],
+    [
+        Status.MultiStatus,
+        "Multi-Status"
+    ],
+    [
+        Status.AlreadyReported,
+        "Already Reported"
+    ],
+    [
+        Status.IMUsed,
+        "IM Used"
+    ],
+    [
+        Status.MultipleChoices,
+        "Multiple Choices"
+    ],
+    [
+        Status.MovedPermanently,
+        "Moved Permanently"
+    ],
+    [
+        Status.Found,
+        "Found"
+    ],
+    [
+        Status.SeeOther,
+        "See Other"
+    ],
+    [
+        Status.NotModified,
+        "Not Modified"
+    ],
+    [
+        Status.UseProxy,
+        "Use Proxy"
+    ],
+    [
+        Status.TemporaryRedirect,
+        "Temporary Redirect"
+    ],
+    [
+        Status.PermanentRedirect,
+        "Permanent Redirect"
+    ],
+    [
+        Status.BadRequest,
+        "Bad Request"
+    ],
+    [
+        Status.Unauthorized,
+        "Unauthorized"
+    ],
+    [
+        Status.PaymentRequired,
+        "Payment Required"
+    ],
+    [
+        Status.Forbidden,
+        "Forbidden"
+    ],
+    [
+        Status.NotFound,
+        "Not Found"
+    ],
+    [
+        Status.MethodNotAllowed,
+        "Method Not Allowed"
+    ],
+    [
+        Status.NotAcceptable,
+        "Not Acceptable"
+    ],
+    [
+        Status.ProxyAuthRequired,
+        "Proxy Authentication Required"
+    ],
+    [
+        Status.RequestTimeout,
+        "Request Timeout"
+    ],
+    [
+        Status.Conflict,
+        "Conflict"
+    ],
+    [
+        Status.Gone,
+        "Gone"
+    ],
+    [
+        Status.LengthRequired,
+        "Length Required"
+    ],
+    [
+        Status.PreconditionFailed,
+        "Precondition Failed"
+    ],
+    [
+        Status.RequestEntityTooLarge,
+        "Request Entity Too Large"
+    ],
+    [
+        Status.RequestURITooLong,
+        "Request URI Too Long"
+    ],
+    [
+        Status.UnsupportedMediaType,
+        "Unsupported Media Type"
+    ],
+    [
+        Status.RequestedRangeNotSatisfiable,
+        "Requested Range Not Satisfiable"
+    ],
+    [
+        Status.ExpectationFailed,
+        "Expectation Failed"
+    ],
+    [
+        Status.Teapot,
+        "I'm a teapot"
+    ],
+    [
+        Status.MisdirectedRequest,
+        "Misdirected Request"
+    ],
+    [
+        Status.UnprocessableEntity,
+        "Unprocessable Entity"
+    ],
+    [
+        Status.Locked,
+        "Locked"
+    ],
+    [
+        Status.FailedDependency,
+        "Failed Dependency"
+    ],
+    [
+        Status.TooEarly,
+        "Too Early"
+    ],
+    [
+        Status.UpgradeRequired,
+        "Upgrade Required"
+    ],
+    [
+        Status.PreconditionRequired,
+        "Precondition Required"
+    ],
+    [
+        Status.TooManyRequests,
+        "Too Many Requests"
+    ],
+    [
+        Status.RequestHeaderFieldsTooLarge,
+        "Request Header Fields Too Large"
+    ],
+    [
+        Status.UnavailableForLegalReasons,
+        "Unavailable For Legal Reasons"
+    ],
+    [
+        Status.InternalServerError,
+        "Internal Server Error"
+    ],
+    [
+        Status.NotImplemented,
+        "Not Implemented"
+    ],
+    [
+        Status.BadGateway,
+        "Bad Gateway"
+    ],
+    [
+        Status.ServiceUnavailable,
+        "Service Unavailable"
+    ],
+    [
+        Status.GatewayTimeout,
+        "Gateway Timeout"
+    ],
+    [
+        Status.HTTPVersionNotSupported,
+        "HTTP Version Not Supported"
+    ],
+    [
+        Status.VariantAlsoNegotiates,
+        "Variant Also Negotiates"
+    ],
+    [
+        Status.InsufficientStorage,
+        "Insufficient Storage"
+    ],
+    [
+        Status.LoopDetected,
+        "Loop Detected"
+    ],
+    [
+        Status.NotExtended,
+        "Not Extended"
+    ],
+    [
+        Status.NetworkAuthenticationRequired,
+        "Network Authentication Required"
+    ], 
+]);
 class Signup extends Ye.Component {
-    onSubmit() {}
+    constructor(props){
+        super(props);
+        this.state = {
+            prompt: '',
+            email: '',
+            refer: window.location ? new URLSearchParams(window.location.search).get('refer') || '' : ''
+        };
+    }
+    onEmailChange = (event)=>{
+        this.setState({
+            email: event.target.value
+        });
+    };
+    onSubmit = async ()=>{
+        const res = await signup(this.state.email, this.state.refer);
+        switch(res.status){
+            case Status.Found:
+                this.setState({
+                    prompt: 'The Email had alread registed, do you forget the password? Please go to login.'
+                });
+                break;
+            case Status.NotFound:
+                this.setState({
+                    prompt: 'Wrong refer code.'
+                });
+                break;
+            case Status.InternalServerError:
+                this.setState({
+                    prompt: 'Internal Server Error.'
+                });
+                break;
+            case Status.Accepted:
+                this.setState({
+                    prompt: 'Congratunation! You successful regist your PeopoleMartDAO account, Please go to your INBOX to active your account.'
+                });
+                break;
+        }
+    };
     render() {
         return Ye.createElement("div", null, Ye.createElement("img", {
             className: "mx-auto",
             src: "https:///peoplemartdao.github.io/images/logo.svg"
         }), Ye.createElement("div", {
-            className: "text-center text-4xl"
-        }, "Mart for all People"), Ye.createElement("div", {
+            className: "text-center text-3xl"
+        }, "A New World of Commerce"), Ye.createElement("div", {
+            className: "text-red-500"
+        }, this.state.prompt), Ye.createElement("div", {
             className: "bg-slate-100 w-96 mx-auto my-6 px-6 py-3 grid gap-3",
             style: {
                 gridTemplateColumns: "minmax(10px, 1fr) 6fr"
             }
         }, Ye.createElement("div", null, "Email:"), Ye.createElement("input", {
+            className: "border",
             type: "text",
             id: "email",
-            name: "email"
+            name: "email",
+            value: this.state.email,
+            onChange: this.onEmailChange
         }), Ye.createElement("div", null, "Refer:"), Ye.createElement("input", {
             className: "bg-gray-200",
             type: "text",
             id: "refer",
             name: "refer",
+            value: this.state.refer,
             disabled: true
         }), Ye.createElement("button", {
             className: "col-span-2 bg-blue-800 text-white rounded",
