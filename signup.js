@@ -6750,9 +6750,11 @@ var Xi = Ji((Sf, ia)=>{
     la(), ia.exports = ra();
 });
 var ua = bi(Xi()), oa = bi(Xi()), { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: kf , createPortal: Ef , createRoot: xf , findDOMNode: Cf , flushSync: Nf , hydrate: _f , hydrateRoot: zf , render: Pf , unmountComponentAtNode: Lf , unstable_batchedUpdates: Tf , unstable_renderSubtreeIntoContainer: Mf , version: Ff  } = oa, { default: vf , ...gf } = oa, Df = (ua.default ?? vf) ?? gf;
+new TextEncoder();
+new TextDecoder();
 const server = '';
 async function signup(email, refer) {
-    return await fetch(`${server}/signup?email=${email}&refer=${refer}`);
+    return await fetch(`${server}/api-v1/signup?email=${encodeURIComponent(email)}&refer=${encodeURIComponent(refer)}`);
 }
 var Status;
 (function(Status1) {
@@ -7074,8 +7076,7 @@ class Signup extends Ye.Component {
         super(props);
         this.state = {
             prompt: '',
-            email: '',
-            refer: window.location ? new URLSearchParams(window.location.search).get('refer') || '' : ''
+            email: ''
         };
     }
     onEmailChange = (event)=>{
@@ -7111,29 +7112,29 @@ class Signup extends Ye.Component {
     render() {
         return Ye.createElement("div", null, Ye.createElement("img", {
             className: "mx-auto",
-            src: "https:///peoplemartdao.github.io/images/logo.svg"
+            src: "https://peoplemartdao.github.io/images/logo.svg"
         }), Ye.createElement("div", {
             className: "text-center text-3xl"
         }, "A New World of Commerce"), Ye.createElement("div", {
-            className: "text-red-500"
-        }, this.state.prompt), Ye.createElement("div", {
             className: "bg-slate-100 w-96 mx-auto my-6 px-6 py-3 grid gap-3",
             style: {
                 gridTemplateColumns: "minmax(10px, 1fr) 6fr"
             }
-        }, Ye.createElement("div", null, "Email:"), Ye.createElement("input", {
-            className: "border",
+        }, Ye.createElement("div", {
+            className: "col-span-2 text-red-500"
+        }, this.state.prompt), Ye.createElement("div", null, "Email:"), Ye.createElement("input", {
+            className: "border px-1",
             type: "text",
             id: "email",
             name: "email",
             value: this.state.email,
             onChange: this.onEmailChange
         }), Ye.createElement("div", null, "Refer:"), Ye.createElement("input", {
-            className: "bg-gray-200",
+            className: "border bg-gray-200 px-1",
             type: "text",
             id: "refer",
             name: "refer",
-            value: this.state.refer,
+            value: this.props.query?.refer,
             disabled: true
         }), Ye.createElement("button", {
             className: "col-span-2 bg-blue-800 text-white rounded",

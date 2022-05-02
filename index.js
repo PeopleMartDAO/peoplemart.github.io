@@ -6750,6 +6750,35 @@ var Xi = Ji((Sf, ia)=>{
     la(), ia.exports = ra();
 });
 var ua = bi(Xi()), oa = bi(Xi()), { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: kf , createPortal: Ef , createRoot: xf , findDOMNode: Cf , flushSync: Nf , hydrate: _f , hydrateRoot: zf , render: Pf , unmountComponentAtNode: Lf , unstable_batchedUpdates: Tf , unstable_renderSubtreeIntoContainer: Mf , version: Ff  } = oa, { default: vf , ...gf } = oa, Df = (ua.default ?? vf) ?? gf;
-const __default = ()=>Ye.createElement("h1", null, "Hello PeopleMart!!")
-;
-zf(document.getElementById('root'), Ye.createElement(__default, null));
+class Index extends Ye.Component {
+    constructor(props){
+        super(props);
+        this.state = {
+            isSignin: false
+        };
+    }
+    signin = ()=>{};
+    logout = ()=>{};
+    render() {
+        return Ye.createElement(Ye.Fragment, null, Ye.createElement("nav", {
+            className: "flex bg-gray-800 text-white px-3"
+        }, Ye.createElement("img", {
+            className: "flex-none h-16",
+            src: "https://peoplemartdao.github.io/images/logo.svg"
+        }), Ye.createElement("div", {
+            className: "flex-1"
+        }), !this.state.isSignin && Ye.createElement("button", {
+            className: "flex-none",
+            type: "button",
+            onClick: this.signin
+        }, "Signin"), this.state.isSignin && Ye.createElement("button", {
+            className: "flex-none",
+            type: "button",
+            onClick: this.logout
+        }, "Logout")));
+    }
+    componentDidMount() {
+        window.localStorage.getItem('access-token');
+    }
+}
+zf(document.getElementById('root'), Ye.createElement(Index, null));
