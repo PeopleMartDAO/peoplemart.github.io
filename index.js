@@ -6764,7 +6764,7 @@ class Index extends Ye.Component {
             className: "flex bg-gray-800 text-white px-3"
         }, Ye.createElement("img", {
             className: "flex-none h-16",
-            src: "https://peoplemartdao.github.io/images/logo-dark.svg"
+            src: "https://peoplemartdao.github.io/images/logo.svg"
         }), Ye.createElement("div", {
             className: "flex-1"
         }), !this.state.isSignin && Ye.createElement("button", {

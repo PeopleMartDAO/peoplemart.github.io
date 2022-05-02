@@ -7112,7 +7112,7 @@ class Signup extends Ye.Component {
     render() {
         return Ye.createElement("div", null, Ye.createElement("img", {
             className: "mx-auto",
-            src: "https://peoplemartdao.github.io/images/logo-light.svg"
+            src: "https://peoplemartdao.github.io/images/logo.svg"
         }), Ye.createElement("div", {
             className: "text-center text-3xl"
         }, "A New World of Commerce"), Ye.createElement("div", {
