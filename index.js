@@ -6750,6 +6750,53 @@ var Xi = Ji((Sf, ia)=>{
     la(), ia.exports = ra();
 });
 var ua = bi(Xi()), oa = bi(Xi()), { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: kf , createPortal: Ef , createRoot: xf , findDOMNode: Cf , flushSync: Nf , hydrate: _f , hydrateRoot: zf , render: Pf , unmountComponentAtNode: Lf , unstable_batchedUpdates: Tf , unstable_renderSubtreeIntoContainer: Mf , version: Ff  } = oa, { default: vf , ...gf } = oa, Df = (ua.default ?? vf) ?? gf;
+const Unsigned = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("div", {
+        className: "flex bg-cover bg-center text-white",
+        style: {
+            backgroundImage: `url("https://peoplemartdao.github.io/images/run-to-new-world.webp")`,
+            height: "800px"
+        }
+    }, Ye.createElement("div", {
+        className: "m-auto text-center font-bold"
+    }, Ye.createElement("span", {
+        className: "text-7xl"
+    }, "PeopleMart DAO"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
+        className: "text-4xl"
+    }, "A New World of Commerce"))), Ye.createElement("div", {
+        className: "flex bg-blue-900 text-white",
+        style: {
+            height: '540px'
+        }
+    }, Ye.createElement("div", {
+        className: "mx-12 my-auto"
+    }, Ye.createElement("span", {
+        className: "text-7xl font-bold"
+    }, "Our Mission"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
+        className: "text-3xl"
+    }, "To build a decentralized market place for the next generation of eCommerce and commerce."))), Ye.createElement("div", {
+        className: "flex",
+        style: {
+            height: '540px'
+        }
+    }, Ye.createElement("div", {
+        className: "mx-12 my-auto"
+    }, Ye.createElement("span", {
+        className: "text-7xl font-bold"
+    }, "Value Proposition"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
+        className: "text-3xl"
+    }, "Complete transparency to promote the ultimate value", Ye.createElement("br", null), "Shop-To-Earn, Sell-To-Earn, and DAO governance", Ye.createElement("br", null), "Easier transactions, less cost, less waste and fewer bad actors"))), Ye.createElement("div", {
+        className: "flex bg-blue-900 text-white",
+        style: {
+            height: '540px'
+        }
+    }, Ye.createElement("div", {
+        className: "mx-12 my-auto"
+    }, Ye.createElement("span", {
+        className: "text-7xl font-bold"
+    }, "Crypto-Native & Tokenomics"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
+        className: "text-3xl"
+    }, "Buy-To-Earn to reward buyers, Sell-To-Earn to reward sellers, all contributors who build and grow the platform are rewarded with PeopleMart DAO tokens ($MART). The platform value will be distributed to all token holders."))))
+;
 class Index extends Ye.Component {
     constructor(props){
         super(props);
@@ -6761,21 +6808,21 @@ class Index extends Ye.Component {
     logout = ()=>{};
     render() {
         return Ye.createElement(Ye.Fragment, null, Ye.createElement("nav", {
-            className: "flex bg-gray-800 text-white px-3"
+            className: "flex px-3 bg-gray-800 text-white"
         }, Ye.createElement("img", {
             className: "flex-none h-16",
-            src: "https://peoplemartdao.github.io/images/logo.svg"
+            src: "https://peoplemartdao.github.io/images/logo-dark.svg"
         }), Ye.createElement("div", {
             className: "flex-1"
         }), !this.state.isSignin && Ye.createElement("button", {
-            className: "flex-none",
+            className: "flex-none text-xl font-bold",
             type: "button",
             onClick: this.signin
-        }, "Signin"), this.state.isSignin && Ye.createElement("button", {
-            className: "flex-none",
+        }, "SIGNIN"), this.state.isSignin && Ye.createElement("button", {
+            className: "flex-none text-xl font-bold",
             type: "button",
             onClick: this.logout
-        }, "Logout")));
+        }, "LOGOUT")), !this.state.isSignin && Ye.createElement(Unsigned, null));
     }
     componentDidMount() {
         window.localStorage.getItem('access-token');
