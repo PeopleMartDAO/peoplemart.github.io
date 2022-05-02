@@ -6812,27 +6812,31 @@ const Unsigned = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("div",
     }, "JOIN US"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
         className: "text-3xl"
     }, "To break the monopoly and to build a new world of commerce."), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("div", {
-        className: "flex gap-1"
+        className: "flex gap-2"
     }, Ye.createElement("a", {
         href: "https://www.clubhouse.com/room/m2KEzq7q",
         target: "_blank"
     }, Ye.createElement("img", {
+        className: "w-12 h-12",
         src: "https://static-assets.clubhouseapi.com/static/favicon.8e5cc2aeba01.ico"
     })), Ye.createElement("a", {
         href: "https://discord.gg/peoplemart",
         target: "_blank"
     }, Ye.createElement("img", {
-        src: "https://discord.com/assets/847541504914fd33810e70a0ea73177e.ico"
+        className: "w-12 h-12",
+        src: "https://peoplemartdao.github.io/images/discord.ico"
     })), Ye.createElement("a", {
         href: "https://t.me/+4FrUVkYfkbEzMmRh",
         target: "_blank"
     }, Ye.createElement("img", {
+        className: "w-12 h-12",
         src: "https://telegram.org/img/favicon.ico"
     })), Ye.createElement("a", {
         href: "https://twitter.com/peoplemartdao",
         target: "_blank"
     }, Ye.createElement("img", {
-        src: "https://abs.twimg.com/favicons/twitter.2.ico"
+        className: "w-12 h-12",
+        src: "https://abs.twimg.com/responsive-web/client-web/icon-default.ee534d86.png"
     })))))))
 ;
 class Index extends Ye.Component {
