@@ -6750,6 +6750,14 @@ var Xi = Ji((Sf, ia)=>{
     la(), ia.exports = ra();
 });
 var ua = bi(Xi()), oa = bi(Xi()), { __SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED: kf , createPortal: Ef , createRoot: xf , findDOMNode: Cf , flushSync: Nf , hydrate: _f , hydrateRoot: zf , render: Pf , unmountComponentAtNode: Lf , unstable_batchedUpdates: Tf , unstable_renderSubtreeIntoContainer: Mf , version: Ff  } = oa, { default: vf , ...gf } = oa, Df = (ua.default ?? vf) ?? gf;
+const blueWhiteHeight540 = {
+    height: '540px',
+    backgroundColor: "#18113D"
+};
+const whiteBlueHeight540 = {
+    height: '540px',
+    color: "#18113D"
+};
 const Unsigned = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("div", {
         className: "flex bg-cover bg-center text-white",
         style: {
@@ -6763,10 +6771,8 @@ const Unsigned = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("div",
     }, "PeopleMart DAO"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
         className: "text-4xl"
     }, "A New World of Commerce"))), Ye.createElement("div", {
-        className: "flex bg-blue-900 text-white",
-        style: {
-            height: '540px'
-        }
+        className: "flex text-white",
+        style: blueWhiteHeight540
     }, Ye.createElement("div", {
         className: "mx-12 my-auto"
     }, Ye.createElement("span", {
@@ -6775,9 +6781,7 @@ const Unsigned = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("div",
         className: "text-3xl"
     }, "To build a decentralized market place for the next generation of eCommerce and commerce."))), Ye.createElement("div", {
         className: "flex",
-        style: {
-            height: '540px'
-        }
+        style: whiteBlueHeight540
     }, Ye.createElement("div", {
         className: "mx-12 my-auto"
     }, Ye.createElement("span", {
@@ -6785,17 +6789,51 @@ const Unsigned = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("div",
     }, "Value Proposition"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
         className: "text-3xl"
     }, "Complete transparency to promote the ultimate value", Ye.createElement("br", null), "Shop-To-Earn, Sell-To-Earn, and DAO governance", Ye.createElement("br", null), "Easier transactions, less cost, less waste and fewer bad actors"))), Ye.createElement("div", {
-        className: "flex bg-blue-900 text-white",
-        style: {
-            height: '540px'
-        }
+        className: "flex text-white",
+        style: blueWhiteHeight540
     }, Ye.createElement("div", {
         className: "mx-12 my-auto"
     }, Ye.createElement("span", {
         className: "text-7xl font-bold"
     }, "Crypto-Native & Tokenomics"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
         className: "text-3xl"
-    }, "Buy-To-Earn to reward buyers, Sell-To-Earn to reward sellers, all contributors who build and grow the platform are rewarded with PeopleMart DAO tokens ($MART). The platform value will be distributed to all token holders."))))
+    }, "Buy-To-Earn to reward buyers, Sell-To-Earn to reward sellers, all contributors who build and grow the platform are rewarded with PeopleMart DAO tokens ($MART). The platform value will be distributed to all token holders."))), Ye.createElement("div", {
+        className: "bg-cover bg-center",
+        style: {
+            ...whiteBlueHeight540,
+            backgroundImage: `url("https://peoplemartdao.github.io/images/star.webp")`
+        }
+    }, Ye.createElement("div", {
+        className: "flex w-1/2 h-full bg-white"
+    }, Ye.createElement("div", {
+        className: "mx-12 my-auto"
+    }, Ye.createElement("span", {
+        className: "text-7xl font-bold"
+    }, "JOIN US"), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("span", {
+        className: "text-3xl"
+    }, "To break the monopoly and to build a new world of commerce."), Ye.createElement("br", null), Ye.createElement("br", null), Ye.createElement("div", {
+        className: "flex gap-1"
+    }, Ye.createElement("a", {
+        href: "https://www.clubhouse.com/room/m2KEzq7q",
+        target: "_blank"
+    }, Ye.createElement("img", {
+        src: "https://static-assets.clubhouseapi.com/static/favicon.8e5cc2aeba01.ico"
+    })), Ye.createElement("a", {
+        href: "https://discord.gg/peoplemart",
+        target: "_blank"
+    }, Ye.createElement("img", {
+        src: "https://discord.com/assets/847541504914fd33810e70a0ea73177e.ico"
+    })), Ye.createElement("a", {
+        href: "https://t.me/+4FrUVkYfkbEzMmRh",
+        target: "_blank"
+    }, Ye.createElement("img", {
+        src: "https://telegram.org/img/favicon.ico"
+    })), Ye.createElement("a", {
+        href: "https://twitter.com/peoplemartdao",
+        target: "_blank"
+    }, Ye.createElement("img", {
+        src: "https://abs.twimg.com/favicons/twitter.2.ico"
+    })))))))
 ;
 class Index extends Ye.Component {
     constructor(props){
