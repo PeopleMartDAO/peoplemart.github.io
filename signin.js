@@ -6443,9 +6443,11 @@ const __default = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("img"
 ;
 new TextEncoder();
 new TextDecoder();
+const setAccessToken = (token)=>localStorage.setItem('access-token', token)
+;
 const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://peoplemart.micinfotech.com/api-v1';
-async function signup(email, refer) {
-    return await fetch(`${server}/signup?email=${encodeURIComponent(email)}&refer=${encodeURIComponent(refer)}`);
+async function signin(email, password) {
+    return await fetch(`${server}/signin?email=${encodeURIComponent(email)}&pwd=${encodeURIComponent(password)}`);
 }
 var Status;
 (function(Status1) {
@@ -6762,14 +6764,15 @@ new Map([
         "Network Authentication Required"
     ], 
 ]);
-class Signup extends Ye.Component {
+class Signin extends Ye.Component {
     constructor(props){
         super(props);
-        const refer = window.location ? new URLSearchParams(window.location.search).get('refer') || '' : props.query?.refer || '';
+        const back = window.location ? new URLSearchParams(window.location.search).get('back') || '/' : props.query?.back || '/';
         this.state = {
             prompt: '',
+            back,
             email: '',
-            refer
+            password: ''
         };
     }
     onEmailChange = (event)=>{
@@ -6777,33 +6780,29 @@ class Signup extends Ye.Component {
             email: event.target.value
         });
     };
+    onPasswordChange = (event)=>{
+        this.setState({
+            password: event.target.value
+        });
+    };
     onSubmit = async ()=>{
-        const res = await signup(this.state.email, this.state.refer);
+        const res = await signin(this.state.email, this.state.password);
         switch(res.status){
-            case Status.Found:
-                this.setState({
-                    prompt: 'The Email had alread registed, do you forget the password? Please go to login.'
-                });
-                break;
             case Status.NotFound:
                 this.setState({
-                    prompt: 'Wrong refer code.'
+                    prompt: 'Email or Password is not correct.'
                 });
                 break;
-            case Status.InternalServerError:
-                this.setState({
-                    prompt: 'Internal Server Error.'
-                });
+            case Status.OK:
+                setAccessToken((await res.json()).token);
+                window.location.href = this.state.back;
                 break;
-            case Status.Accepted:
-                this.setState({
-                    prompt: 'Congratunation! You successful regist your PeopoleMartDAO account, Please go to your INBOX to active your account.'
-                });
-                break;
+            default:
+                throw res.status;
         }
     };
     render() {
-        const { email , refer , prompt  } = this.state;
+        const { prompt , email , password  } = this.state;
         return Ye.createElement(Ye.Fragment, null, Ye.createElement(__default, null), Ye.createElement("div", {
             className: "bg-gray-100 w-96 mx-auto my-6 px-6 py-3 rounded"
         }, Ye.createElement("div", {
@@ -6818,24 +6817,24 @@ class Signup extends Ye.Component {
             value: email,
             onChange: this.onEmailChange
         }), Ye.createElement("label", {
-            className: "block w-full mt-3 text-gray-700",
-            htmlFor: "refer"
-        }, "Refer"), Ye.createElement("input", {
-            className: "block w-full border bg-gray-300 px-1",
-            type: "text",
-            name: "refer",
-            value: refer,
-            disabled: true
+            className: "block w-full mt-3 text-gray-600",
+            htmlFor: "password"
+        }, "Password"), Ye.createElement("input", {
+            className: "block w-full border px-1",
+            type: "password",
+            name: "password",
+            value: password,
+            onChange: this.onPasswordChange
         }), Ye.createElement("button", {
             className: "block w-full mt-3 bg-blue-800 text-white rounded",
             type: "button",
             onClick: this.onSubmit
-        }, "Join"), Ye.createElement("div", {
+        }, "Signin"), Ye.createElement("div", {
             className: "mt-3 text-center"
-        }, "Already on PeopleMart? ", Ye.createElement("a", {
+        }, "Do not have a PeopleMart account? ", Ye.createElement("a", {
             className: "text-blue-700 hover:underline",
-            href: "/signin.html"
-        }, "SIGNIN"))));
+            href: "/signup.html?refer=62573ddb3e83022a2ff958c0"
+        }, "SIGNUP"))));
     }
 }
-$2(document.getElementById('root'), Ye.createElement(Signup, null));
+$2(document.getElementById('root'), Ye.createElement(Signin, null));

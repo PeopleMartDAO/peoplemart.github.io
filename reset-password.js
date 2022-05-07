@@ -6441,11 +6441,179 @@ const __default = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("img"
         className: "text-center text-3xl"
     }, "A New World of Commerce"))
 ;
+const base64abc = [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F",
+    "G",
+    "H",
+    "I",
+    "J",
+    "K",
+    "L",
+    "M",
+    "N",
+    "O",
+    "P",
+    "Q",
+    "R",
+    "S",
+    "T",
+    "U",
+    "V",
+    "W",
+    "X",
+    "Y",
+    "Z",
+    "a",
+    "b",
+    "c",
+    "d",
+    "e",
+    "f",
+    "g",
+    "h",
+    "i",
+    "j",
+    "k",
+    "l",
+    "m",
+    "n",
+    "o",
+    "p",
+    "q",
+    "r",
+    "s",
+    "t",
+    "u",
+    "v",
+    "w",
+    "x",
+    "y",
+    "z",
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "6",
+    "7",
+    "8",
+    "9",
+    "+",
+    "/"
+];
+function encode(data) {
+    const uint8 = typeof data === "string" ? new TextEncoder().encode(data) : data instanceof Uint8Array ? data : new Uint8Array(data);
+    let result = "", i;
+    const l = uint8.length;
+    for(i = 2; i < l; i += 3){
+        result += base64abc[uint8[i - 2] >> 2];
+        result += base64abc[(uint8[i - 2] & 3) << 4 | uint8[i - 1] >> 4];
+        result += base64abc[(uint8[i - 1] & 15) << 2 | uint8[i] >> 6];
+        result += base64abc[uint8[i] & 63];
+    }
+    if (i === l + 1) {
+        result += base64abc[uint8[i - 2] >> 2];
+        result += base64abc[(uint8[i - 2] & 3) << 4];
+        result += "==";
+    }
+    if (i === l) {
+        result += base64abc[uint8[i - 2] >> 2];
+        result += base64abc[(uint8[i - 2] & 3) << 4 | uint8[i - 1] >> 4];
+        result += base64abc[(uint8[i - 1] & 15) << 2];
+        result += "=";
+    }
+    return result;
+}
+function decode(b64) {
+    const binString = atob(b64);
+    const size = binString.length;
+    const bytes = new Uint8Array(size);
+    for(let i = 0; i < size; i++){
+        bytes[i] = binString.charCodeAt(i);
+    }
+    return bytes;
+}
+function addPaddingToBase64url(base64url) {
+    if (base64url.length % 4 === 2) return base64url + "==";
+    if (base64url.length % 4 === 3) return base64url + "=";
+    if (base64url.length % 4 === 1) {
+        throw new TypeError("Illegal base64url string!");
+    }
+    return base64url;
+}
+function convertBase64urlToBase64(b64url) {
+    if (!/^[-_A-Z0-9]*?={0,2}$/i.test(b64url)) {
+        throw new TypeError("Failed to decode base64url: invalid character");
+    }
+    return addPaddingToBase64url(b64url).replace(/\-/g, "+").replace(/_/g, "/");
+}
+function convertBase64ToBase64url(b64) {
+    return b64.replace(/=/g, "").replace(/\+/g, "-").replace(/\//g, "_");
+}
+function encode1(uint8) {
+    return convertBase64ToBase64url(encode(uint8));
+}
+function decode1(b64url) {
+    return decode(convertBase64urlToBase64(b64url));
+}
+const mod = {
+    addPaddingToBase64url: addPaddingToBase64url,
+    encode: encode1,
+    decode: decode1
+};
 new TextEncoder();
-new TextDecoder();
+const decoder = new TextDecoder();
+function is3Tuple(arr) {
+    return arr.length === 3;
+}
+function decode2(jwt) {
+    try {
+        const arr = jwt.split(".").map(mod.decode).map((uint8Array, index)=>index === 0 || index === 1 ? JSON.parse(decoder.decode(uint8Array)) : uint8Array
+        );
+        if (is3Tuple(arr)) return arr;
+        else throw new Error();
+    } catch  {
+        throw Error("The serialization of the jwt is invalid.");
+    }
+}
+const setAccessToken = (token)=>localStorage.setItem('access-token', token)
+;
+const getAccessToken = ()=>localStorage.getItem('access-token')
+;
+const removeAccessToken = ()=>localStorage.removeItem('access-token')
+;
+const isTokenExpired = ()=>{
+    const token = getAccessToken();
+    if (!token) return true;
+    const [, payload, ] = decode2(token);
+    if (!payload) return true;
+    const { exp  } = payload;
+    if (!exp) return true;
+    return exp < Date.now() / 1000;
+};
 const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://peoplemart.micinfotech.com/api-v1';
-async function signup(email, refer) {
-    return await fetch(`${server}/signup?email=${encodeURIComponent(email)}&refer=${encodeURIComponent(refer)}`);
+const fetchInit = (method, body)=>{
+    const headers = {
+        'Authorization': `Bearer ${getAccessToken()}`
+    };
+    const init = {
+        headers
+    };
+    if (method) init.method = method;
+    if (body) {
+        headers['Content-Type'] = 'application/json';
+        init.body = JSON.stringify(body);
+    }
+    return init;
+};
+async function resetPassword(password) {
+    return await fetch(`${server}/reset-password?pwd=${encodeURIComponent(password)}`, fetchInit('PATCH'));
 }
 var Status;
 (function(Status1) {
@@ -6762,80 +6930,125 @@ new Map([
         "Network Authentication Required"
     ], 
 ]);
-class Signup extends Ye.Component {
+const strongPassword = /(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{8,})/;
+const mediumPassword = /((?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[^A-Za-z0-9])(?=.{6,}))|((?=.*[a-z])(?=.*[A-Z])(?=.*[^A-Za-z0-9])(?=.{8,}))/;
+class ResetPassword extends Ye.Component {
     constructor(props){
         super(props);
-        const refer = window.location ? new URLSearchParams(window.location.search).get('refer') || '' : props.query?.refer || '';
         this.state = {
+            isTokenExpired: false,
             prompt: '',
-            email: '',
-            refer
+            password: '',
+            confirm: '',
+            passwordComplexity: 'W',
+            passwordPrompt: '',
+            confirmPrompt: '',
+            submitEnable: false,
+            isResetSuccess: false
         };
     }
-    onEmailChange = (event)=>{
+    setConfirmPrompt = (password, confirm)=>{
         this.setState({
-            email: event.target.value
+            confirmPrompt: confirm && confirm != password ? 'Not Match' : '',
+            submitEnable: !this.state.isTokenExpired && confirm == password && password.length > 0
         });
     };
+    onPasswordChange = (event)=>{
+        const password = event.target.value;
+        const passwordComplexity = strongPassword.test(password) ? 'S' : mediumPassword.test(password) ? 'M' : 'W';
+        const passwordPrompt = !password ? '' : passwordComplexity == 'S' ? 'Strong Password!' : passwordComplexity == 'M' ? 'Medium Password!' : 'Weak Password!';
+        this.setState({
+            password,
+            passwordComplexity,
+            passwordPrompt
+        });
+        this.setConfirmPrompt(password, this.state.confirm);
+    };
+    onConfirmChange = (event)=>{
+        const confirm = event.target.value;
+        this.setState({
+            confirm
+        });
+        this.setConfirmPrompt(this.state.password, confirm);
+    };
     onSubmit = async ()=>{
-        const res = await signup(this.state.email, this.state.refer);
+        this.setState({
+            prompt: ''
+        });
+        const res = await resetPassword(this.state.password);
         switch(res.status){
-            case Status.Found:
+            case Status.Forbidden:
                 this.setState({
-                    prompt: 'The Email had alread registed, do you forget the password? Please go to login.'
-                });
-                break;
-            case Status.NotFound:
-                this.setState({
-                    prompt: 'Wrong refer code.'
+                    prompt: 'Signin Failed'
                 });
                 break;
             case Status.InternalServerError:
                 this.setState({
-                    prompt: 'Internal Server Error.'
+                    prompt: 'Internal Server Error'
                 });
                 break;
-            case Status.Accepted:
+            case Status.OK:
                 this.setState({
-                    prompt: 'Congratunation! You successful regist your PeopoleMartDAO account, Please go to your INBOX to active your account.'
+                    isResetSuccess: true
                 });
                 break;
+            default:
+                throw res.status;
         }
     };
     render() {
-        const { email , refer , prompt  } = this.state;
+        const { prompt , password , confirm , passwordComplexity , passwordPrompt , confirmPrompt , submitEnable , isResetSuccess  } = this.state;
         return Ye.createElement(Ye.Fragment, null, Ye.createElement(__default, null), Ye.createElement("div", {
             className: "bg-gray-100 w-96 mx-auto my-6 px-6 py-3 rounded"
         }, Ye.createElement("div", {
             className: "text-red-500 text-right"
         }, prompt), Ye.createElement("label", {
             className: "block w-full mt-3 text-gray-600",
-            htmlFor: "email"
-        }, "Email"), Ye.createElement("input", {
+            htmlFor: "password"
+        }, "Password"), Ye.createElement("input", {
             className: "block w-full border px-1",
-            type: "text",
-            name: "email",
-            value: email,
-            onChange: this.onEmailChange
-        }), Ye.createElement("label", {
-            className: "block w-full mt-3 text-gray-700",
-            htmlFor: "refer"
-        }, "Refer"), Ye.createElement("input", {
-            className: "block w-full border bg-gray-300 px-1",
-            type: "text",
-            name: "refer",
-            value: refer,
-            disabled: true
-        }), Ye.createElement("button", {
-            className: "block w-full mt-3 bg-blue-800 text-white rounded",
+            type: "password",
+            name: "password",
+            value: password,
+            onChange: this.onPasswordChange
+        }), Ye.createElement("div", {
+            className: `text-right ${passwordComplexity == 'S' ? 'text-green-500' : passwordComplexity == 'M' ? 'text-blue-500' : 'text-red-500'}`
+        }, passwordPrompt), Ye.createElement("label", {
+            className: "block w-full mt-3 text-gray-600",
+            htmlFor: "confirm"
+        }, "Confirm"), Ye.createElement("input", {
+            className: "block w-full border px-1",
+            type: "password",
+            name: "confirm",
+            value: confirm,
+            onChange: this.onConfirmChange
+        }), Ye.createElement("div", {
+            className: "text-red-500 text-right"
+        }, confirmPrompt), Ye.createElement("button", {
+            className: "block w-full mt-3 bg-blue-800 disabled:bg-gray-500 text-white rounded",
             type: "button",
-            onClick: this.onSubmit
-        }, "Join"), Ye.createElement("div", {
+            onClick: this.onSubmit,
+            disabled: !submitEnable
+        }, "Reset"), isResetSuccess && Ye.createElement("div", {
             className: "mt-3 text-center"
-        }, "Already on PeopleMart? ", Ye.createElement("a", {
+        }, "Password Modify Success, you can ", Ye.createElement("a", {
             className: "text-blue-700 hover:underline",
             href: "/signin.html"
-        }, "SIGNIN"))));
+        }, "SIGNIN"), " now")));
+    }
+    componentDidMount() {
+        const token = new URLSearchParams(window.location.search).get('token');
+        if (token) setAccessToken(token);
+        const expired = isTokenExpired();
+        this.setState({
+            isTokenExpired: expired
+        });
+        if (expired) this.setState({
+            prompt: 'Link is expired'
+        });
+    }
+    componentWillUnmount() {
+        removeAccessToken();
     }
 }
-$2(document.getElementById('root'), Ye.createElement(Signup, null));
+$2(document.getElementById('root'), Ye.createElement(ResetPassword, null));
