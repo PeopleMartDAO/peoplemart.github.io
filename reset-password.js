@@ -6597,7 +6597,7 @@ const isTokenExpired = ()=>{
     if (!exp) return true;
     return exp < Date.now() / 1000;
 };
-const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://peoplemart.micinfotech.com/api-v1';
+const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://api.peoplemar.dev/api-v1';
 const fetchInit = (method, body)=>{
     const headers = {
         'Authorization': `Bearer ${getAccessToken()}`

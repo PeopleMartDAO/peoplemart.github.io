@@ -6443,7 +6443,7 @@ const __default = ()=>Ye.createElement(Ye.Fragment, null, Ye.createElement("img"
 ;
 new TextEncoder();
 new TextDecoder();
-const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://peoplemart.micinfotech.com/api-v1';
+const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://api.peoplemar.dev/api-v1';
 async function signup(email, refer) {
     return await fetch(`${server}/signup?email=${encodeURIComponent(email)}&refer=${encodeURIComponent(refer)}`);
 }

@@ -6445,7 +6445,7 @@ new TextEncoder();
 new TextDecoder();
 const setAccessToken = (token)=>localStorage.setItem('access-token', token)
 ;
-const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://peoplemart.micinfotech.com/api-v1';
+const server = window.location?.hostname == 'localhost' ? '/api-v1' : 'https://api.peoplemar.dev/api-v1';
 async function signin(email, password) {
     return await fetch(`${server}/signin?email=${encodeURIComponent(email)}&pwd=${encodeURIComponent(password)}`);
 }
